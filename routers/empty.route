@@ -1,0 +1,23 @@
+
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(-1);
+
+// Autoload our dependencies with Composer
+require 'vendor/autoload.php';
+require 'models/{model}.model.php';
+
+$app->get('/{model}', function(){
+  $users = \users::all();
+    echo $users->toJson();
+});
+$app->get('/{model}/:id', function($id){
+  $users = \{model}::where("Id_User", $id)->first();
+  if(count(${model}) > 0){
+    echo ${model}->toJson();
+  }else{
+    echo json_encode(array("message" => "empty"));
+  }
+
+});
